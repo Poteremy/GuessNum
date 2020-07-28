@@ -16,13 +16,19 @@ let noUp = document.getElementById('noUp');
 let again = document.getElementById('again');
 
 let min = 1
-let max = 1000
+let max = 100
 
-
-ready.addEventListener('click', function() {
+startNow = (e) => {
+    e.preventDefault()
     start.classList.add('hidden')
     guess.classList.remove('hidden')
     theNumber.innerText = `(Your number is ${myNumber.value})`
+}
+
+myNumber.addEventListener('keyup', function(event) {
+    if(event.keyCode === 13) {
+        ready.click()
+    }
 })
 
 let number = Math.floor(Math.random() * (max - min + 1) + min)
@@ -31,13 +37,13 @@ numGuess.innerText = number
 
 noDown.addEventListener('click', function () {
     max = number
-    number = Math.floor(Math.random() * (max - min + 1) + min)
+    number = Math.floor(Math.random() * (max - min) + min)
     numGuess.innerText = number
 })
 
 noUp.addEventListener('click', function() {
     min = number
-    number = Math.floor(Math.random() * (max - min + 1) + min) 
+    number = Math.floor(Math.random() * (max - min) + min) 
     numGuess.innerText = number
 })
 
@@ -51,7 +57,7 @@ again.addEventListener('click', reset)
 
 function reset() {
     min = 1
-    max = 1000
+    max = 100
     win.classList.add('hidden')
     title.classList.remove('hidden');
     start.classList.remove('hidden');
